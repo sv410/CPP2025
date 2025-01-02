@@ -1,0 +1,14 @@
+class Solution {
+public:
+    vector<int> vowelStrings(vector<string>& words, vector<vector<int>>& queries) {
+        auto isVowel = [](char c)
+         { 
+            return string("aeiou").find(c) != string::npos; 
+            };
+        vector<int> result;
+        for (auto& q : queries) result.push_back(count_if(words.begin() + q[0], words.begin() + q[1] + 1, [&](string& w )
+         { return isVowel(w.front()) && isVowel(w.back()); }));
+        return result;
+    }
+};
+https://leetcode.com/problems/count-vowel-strings-in-ranges/submissions/1495188967/?envType=daily-question&envId=2025-01-02
