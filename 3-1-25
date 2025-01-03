@@ -1,0 +1,52 @@
+https://leetcode.com/problems/number-of-ways-to-split-array/description/?envType=daily-question&envId=2025-01-03
+The problem is to find the number of ways to split an array into two non-empty parts such that the sum of the left part is greater than or equal to the sum of the right part. The approach involves:
+
+Prefix Sum Calculation:
+Compute the prefix sum for the array. This allows efficient calculation of the sum of the left and right parts of the array during iteration.
+
+Condition Checking:
+Iterate through the array and for each valid split point (except the last index), check if the sum of the left part is greater than or equal to the sum of the right part.
+
+Count Valid Splits:
+Maintain a counter for valid splits and return the count after processing the entire array.
+
+Complexity
+Time Complexity:
+
+Prefix sum calculation takes 𝑂(𝑛)
+Iterating through the array to count valid splits takes 𝑂(𝑛)
+Overall time complexity is 𝑂(𝑛)
+Space Complexity:
+
+The prefix sum array requires 𝑂(𝑛)
+Total space complexity is 𝑂(𝑛)
+🔄 Detailed Steps
+Initialize an empty list l for prefix sums, and variables cur (current sum) and res (result counter).
+Traverse the nums array:
+Add each number to cur.
+Append cur to l.
+Iterate through the prefix sum list l (excluding the last index):
+Check if l[i] (left sum) is greater than or equal to l[-1] - l[i] (right sum).
+If true, increment res.
+Return res as the final count of valid splits.
+Code
+class Solution {
+public:
+    int waysToSplitArray(vector<int>& nums) {
+        long long totalSum = 0, leftSum = 0;
+        int res = 0;
+
+        for (int num : nums) {
+            totalSum += num;
+        }
+
+        for (int i = 0; i < nums.size() - 1; ++i) {
+            leftSum += nums[i];
+            if (leftSum >= totalSum - leftSum) {
+                res++;
+            }
+        }
+        
+        return res;
+    }
+};
