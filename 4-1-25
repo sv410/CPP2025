@@ -1,0 +1,15 @@
+https://leetcode.com/problems/unique-length-3-palindromic-subsequences/description/?envType=daily-question&envId=2025-01-04
+class Solution {
+public:
+    int countPalindromicSubsequence(string s) {
+        unordered_set<string> palindromes; 
+        for (char c = 'a'; c <= 'z'; ++c)
+         {
+             int l = s.find(c), r = s.rfind(c);
+          if (l < r)
+           for (int i = l + 1; i < r; ++i)
+            palindromes.insert(string(1, c) + s[i] + c); 
+            }
+        return palindromes.size();
+    }
+};
