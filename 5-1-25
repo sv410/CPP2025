@@ -1,0 +1,10 @@
+https://leetcode.com/problems/shifting-letters-ii/
+class Solution {
+public:
+ string shiftingLetters(string s, vector<vector<int>>& shifts) {
+    vector<int> diff(s.size() + 1, 0);
+    for (auto &shift : shifts) diff[shift[0]] += shift[2] ?1 : -1, diff[shift[1] + 1] += shift[2] ? -1 : 1;
+    for (int i = 0, shift = 0; i < s.size(); ++i) s[i] = 'a' + (s[i] - 'a' + (shift = (shift + diff[i]) % 26) + 26) % 26;
+    return s;
+}
+};
